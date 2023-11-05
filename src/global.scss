@@ -24,3 +24,52 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+/* Swiper */
+swiper-container {
+  --swiper-pagination-bullet-inactive-color: var(--ion-color-step-500, #cccccc);
+}
+
+/* Fonts */
+@font-face {
+  font-family: 'OleoScript';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/OleoScript-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'OleoScript';
+  font-style: normal;
+  font-weight: bold;
+  src: url('./assets/fonts/OleoScript-Bold.ttf');
+}
+
+/* Variables */
+:root {
+  --border-radius-val: 0.6rem;
+}
+
+/* Utils */
+.border-round {
+  border-radius: var(--border-radius-val);
+}
+
+.title > :is(h1), .title:is(h1) {
+  font-family: 'OleoScript';
+  font-size: xx-large;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.center-ctn {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-ctn > :is(div) {
+  width: 100%;
+}

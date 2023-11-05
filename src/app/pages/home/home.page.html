@@ -1,0 +1,25 @@
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-margin">
+    <ion-row class="ion-margin-bottom">
+      <ion-col size="12" size-lg="8">
+        <ion-text class="title ion-text-left">
+          <h1>Ultimas Plantas</h1>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-margin">
+      <ion-col size="6" size-md="4" size-lg="2" *ngFor="let plant of plantData; let id = index">
+        <ion-card>
+          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+
+          <ion-card-header>
+            <ion-card-title>{{ plant.name }}</ion-card-title>
+          </ion-card-header>
+
+          <ion-button routerLink="/plant-detail/{{id}}" routerDirection="foward" fill="clear">More</ion-button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,57 @@
+<ion-content fullscreen="true">
+  <div class="center-ctn">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="ion-margin-horizontal">
+      <ion-grid class="login-ctn">
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="12" size-lg="10" class="ion-margin-bottom">
+            <ion-text class="title ion-text-center">
+              <h1>Bienvenido A Plantify</h1>
+            </ion-text>
+          </ion-col>
+
+          <ion-col size="12" size-lg="10">
+            <ion-item>
+              <ion-input label="Email" labelPlacement="stacked" formControlName="email" type="email"></ion-input>
+            </ion-item>
+            <div *ngFor="let validation of validationMessages.email">
+              <ion-text color="danger" class="error-msg"
+                *ngIf="loginForm.get('email')?.hasError(validation.type) && loginForm.get('email')?.dirty">
+                {{ validation.message }}
+              </ion-text>
+            </div>
+          </ion-col>
+
+          <ion-col size="12" size-lg="10">
+            <ion-item>
+              <ion-input label="Password" labelPlacement="stacked" formControlName="password"
+                type="password"></ion-input>
+            </ion-item>
+
+            <div *ngFor="let validation of validationMessages.password">
+              <ion-text color="danger" class="error-msg"
+                *ngIf="loginForm.get('password')?.hasError(validation.type) && loginForm.get('password')?.dirty">
+                {{ validation.message }}
+              </ion-text>
+            </div>
+
+            <ion-text class="ion-float-right ion-margin-top">
+              <a routerLink="/forgot-password" routerDirection="foward" style="font-size: small">Recover Password</a>
+            </ion-text>
+          </ion-col>
+
+          <ion-col size="10" size-lg="6" class="ion-margin-top">
+            <ion-button expand="full" type="submit" [disabled]="!loginForm.valid"
+              class="login-button">Ingresar</ion-button>
+          </ion-col>
+
+          <ion-col size="12" size-lg="10" class="ion-margin-vertical ion-text-center">
+            <ion-text style="font-size: small; font-weight: bold;">
+              Don't have an account?
+              <a routerLink="/signup" routerDirection="foward" style="text-decoration: none;">Sign Up</a>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

@@ -1,0 +1,75 @@
+<ion-content fullscreen="true">
+  <div class="center-ctn">
+    <form [formGroup]="registrationForm" (ngSubmit)="register()" class="ion-margin-horizontal">
+      <ion-grid class="signin-ctn">
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="12" size-lg="10" class="ion-margin-bottom">
+            <ion-text class="title ion-text-center">
+              <h1>Bienvenido A Plantify</h1>
+            </ion-text>
+          </ion-col>
+
+          <ion-col size="12" size-lg="10">
+            <ion-item>
+              <ion-input label="Email" labelPlacement="stacked" formControlName="email" type="email"></ion-input>
+            </ion-item>
+            <div *ngFor="let validation of validationMessages.email">
+              <ion-text color="danger" class="error-msg"
+                *ngIf="registrationForm.get('email')?.hasError(validation.type) && registrationForm.get('email')?.dirty">
+                {{ validation.message }}
+              </ion-text>
+            </div>
+          </ion-col>
+
+          <ion-col size="12" size-lg="10">
+            <ion-item>
+              <ion-input label="Name" labelPlacement="stacked" formControlName="name" type="text"></ion-input>
+            </ion-item>
+            <div *ngFor="let validation of validationMessages.name">
+              <ion-text color="danger" class="error-msg"
+                *ngIf="registrationForm.get('name')?.hasError(validation.type) && registrationForm.get('name')?.dirty">
+                {{ validation.message }}
+              </ion-text>
+            </div>
+          </ion-col>
+
+          <ion-col size="12" size-lg="10">
+            <ion-item>
+              <ion-input label="Password" labelPlacement="stacked" id="password" formControlName="password" type="password"></ion-input>
+            </ion-item>
+            <div *ngFor="let validation of validationMessages.password">
+              <ion-text color="danger" class="error-msg"
+                *ngIf="registrationForm.get('password')?.hasError(validation.type) && registrationForm.get('password')?.dirty">
+                {{ validation.message }}
+              </ion-text>
+            </div>
+          </ion-col>
+
+          <ion-col size="12" size-lg="10">
+            <ion-item>
+              <ion-input label="Confirm Password" labelPlacement="stacked" id="confirmPassword" formControlName="confirmPassword"
+                type="password"></ion-input>
+            </ion-item>
+            <div *ngFor="let validation of validationMessages.confirmPassword">
+              <ion-text color="danger" class="error-msg"
+                *ngIf="registrationForm.get('confirmPassword')?.hasError(validation.type) && registrationForm.get('confirmPassword')?.dirty">
+                {{ validation.message }}
+              </ion-text>
+            </div>
+          </ion-col>
+
+          <ion-col size="10" size-lg="6" class="ion-margin-top">
+            <ion-button expand="full" type="submit" [disabled]="!registrationForm.valid"
+              class="login-button">Registrate</ion-button>
+          </ion-col>
+
+          <ion-col size="12" size-lg="10" class="ion-margin-vertical ion-text-center">
+            <ion-text style="font-weight: bold;">
+              <a routerLink="/login" routerDirection="foward" style="text-decoration: none;">Log In</a>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

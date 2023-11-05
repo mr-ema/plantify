@@ -1,0 +1,9 @@
+ion-card {
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  ion-card {
+    width: 50%;
+  }
+}

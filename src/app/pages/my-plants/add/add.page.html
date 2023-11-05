@@ -1,0 +1,52 @@
+<ion-header class="ion-hide-md-up">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="center-ctn">
+    <form [formGroup]="addPlantForm" (ngSubmit)="onSubmit()">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-margin-bottom">
+            <ion-text class="ion-text-center title">
+              <h1>Crea Tu Planta</h1>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="12" size-lg="8">
+            <ion-item>
+              <ion-input label="Plant Name" labelPlacement="stacked" formControlName="name" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12" size-lg="8">
+            <ion-item>
+              <ion-input label="Height (cm)" labelPlacement="stacked" formControlName="height"
+                type="number"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12" size-lg="8">
+            <ion-item>
+              <ion-select label="Indoor/Outdoor" labelPlacement="stacked" formControlName="indoorOutdoor">
+                <ion-select-option value="indoor">Indoor</ion-select-option>
+                <ion-select-option value="outdoor">Outdoor</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="8" size-lg="6" class="ion-margin-top">
+            <ion-button expand="full" type="submit" [disabled]="!addPlantForm.valid">Save</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

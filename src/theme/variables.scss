@@ -74,6 +74,42 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /*
+   * Default Light Theme
+   * -------------------------------------------
+   */
+
+  body {
+    --ion-background-color: #f4f5f8;
+    --ion-text-color: #333333;
+    --ion-border-color: #d0d0d0;
+
+    --ion-color-step-50: #e8e8e8;
+    --ion-color-step-100: #dcdcdc;
+    --ion-color-step-150: #d0d0d0;
+    --ion-color-step-200: #c4c4c4;
+    --ion-color-step-250: #b8b8b8;
+    --ion-color-step-300: #acacac;
+    --ion-color-step-350: #a0a0a0;
+    --ion-color-step-400: #949494;
+    --ion-color-step-450: #888888;
+    --ion-color-step-500: #7c7c7c;
+    --ion-color-step-550: #707070;
+    --ion-color-step-600: #646464;
+    --ion-color-step-650: #585858;
+    --ion-color-step-700: #4c4c4c;
+    --ion-color-step-750: #404040;
+    --ion-color-step-800: #343434;
+    --ion-color-step-850: #282828;
+    --ion-color-step-900: #1c1c1c;
+    --ion-color-step-950: #101010;
+
+    --ion-item-background: #ffffff;
+    --ion-toolbar-background: #f0f0f0;
+    --ion-tab-bar-background: #f0f0f0;
+    --ion-card-background: #ffffff;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -236,7 +272,7 @@
 }
 
 html {
-  /* 
+  /*
    * For more information on dynamic font scaling, visit the documentation:
    * https://ionicframework.com/docs/layout/dynamic-font-scaling
    */

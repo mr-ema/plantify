@@ -1,0 +1,38 @@
+<ion-header class="ion-hide-md-up">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="plant">
+  <swiper-container class="ion-margin-horizontal" style="height: 100%" slides-per-view="1" speed="500" loop="true" pagination="true" css-mode="true">
+    <swiper-slide class="center-ctn">
+      <ion-card>
+        <img [src]="plant.imgUrl" alt="{{ plant.name }}" />
+        <ion-card-header>
+          <ion-card-title>{{ plant.name }}</ion-card-title>
+          <ion-card-subtitle>{{ plant.subtitle || "" }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{ plant.description }}
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+
+    <swiper-slide class="center-ctn">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>More Info</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{ plant.description }}
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+
+    <swiper-pagination type="bullets"></swiper-pagination>
+  </swiper-container>
+</ion-content>

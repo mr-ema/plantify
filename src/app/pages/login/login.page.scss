@@ -1,0 +1,26 @@
+ion-content {
+  --background: linear-gradient(rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.36)), url('/assets/images/bg-1.jpg') center/cover no-repeat;
+}
+
+.login-ctn {
+  margin: 0;
+  padding: 1rem;
+  background: var(--ion-background-color);
+  border-radius: var(--border-radius-val);
+  max-width: 850px;
+}
+
+.title > h2 {
+  margin-top: 0.5rem;
+  font-size: small;
+}
+
+.custom-msg {
+  display: block;
+  text-align: center;
+  font-size: x-large;
+}
+
+.error-msg {
+  font-size: small;
+}

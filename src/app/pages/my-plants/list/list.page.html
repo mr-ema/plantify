@@ -1,0 +1,30 @@
+<ion-content [fullscreen]="true">
+  <div class="center-ctn">
+    <div>
+      <ion-grid class="ion-margin">
+        <ion-row class="ion-margin-bottom ion-justify-content-center">
+          <ion-col size="12" size-lg="8">
+            <ion-text class="title ion-text-center">
+              <h1>Mis Plantas</h1>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="12" size-lg="8">
+            <ion-list lines="none" class="border-round">
+              <app-my-plants-list-item *ngFor="let plant of plantList"
+                [plantName]="plant.name"></app-my-plants-list-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-margin-top ion-justify-content-center">
+          <ion-col size="12" size-lg="8">
+            <ion-button routerLink="/my-plants/add" routerDirection="foward" expand="block">+</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>
