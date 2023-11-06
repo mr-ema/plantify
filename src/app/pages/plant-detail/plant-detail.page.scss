@@ -1,9 +1,13 @@
-ion-card {
-  width: 100%;
+swiper-slide {
+  align-self: center;
 }
 
 @media (min-width: 992px) {
+  .center-ctn > div {
+    max-width: 800px;
+  }
+
   ion-card {
-    width: 50%;
+    max-width: 800px;
   }
 }
