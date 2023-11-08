@@ -13,8 +13,15 @@
         <ion-row class="ion-justify-content-center">
           <ion-col size="12" size-lg="8">
             <ion-list lines="none" class="border-round">
-              <app-my-plants-list-item *ngFor="let plant of plantList"
-                [plantName]="plant.name"></app-my-plants-list-item>
+              <ion-item *ngFor="let plant of plantList">
+                <ion-thumbnail slot="start">
+                  <img alt="{{plant.name}}" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+                </ion-thumbnail>
+                <ion-label class="ion-text-center">{{ plant.name }}</ion-label>
+                <ion-button routerLink="/my-plants/edit" routerDirection="foward">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+              </ion-item>
             </ion-list>
           </ion-col>
         </ion-row>
