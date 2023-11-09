@@ -1,6 +1,12 @@
 <ion-content [fullscreen]="true">
-  <ion-grid class="ion-margin">
-    <ion-row class="ion-margin-bottom">
+  <ion-grid>
+    <ion-row class="ion-margin-vertical ion-justify-content-center">
+      <ion-col size="12" size-lg="8">
+        <ion-searchbar color="light"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-margin-bottom ion-justify-content-center">
       <ion-col size="12" size-lg="8">
         <ion-text class="title ion-text-left">
           <h1>Ultimas Plantas</h1>
@@ -8,17 +14,32 @@
       </ion-col>
     </ion-row>
 
-    <ion-row class="ion-margin">
-      <ion-col size="6" size-md="4" size-lg="2" *ngFor="let plant of plantData; let id = index">
-        <ion-card>
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-lg="8">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" size-md="4" *ngFor="let plant of plantData; let id = index">
+              <ion-img alt="image of a {{ plant.name }} plant"
+                src="https://ionicframework.com/docs/img/demos/card-media.png">
+              </ion-img>
 
-          <ion-card-header>
-            <ion-card-title>{{ plant.name }}</ion-card-title>
-          </ion-card-header>
+              <ion-item>
+                <ion-label>
+                  <ion-text class="ion-text-center">
+                    <h1 style="font-size: medium;">
+                      <b> {{ plant.name }} </b>
+                    </h1>
+                  </ion-text>
 
-          <ion-button routerLink="/plant-detail/{{id}}" routerDirection="foward" fill="clear">More</ion-button>
-        </ion-card>
+                  <ion-button class="ion-margin-top" color="medium" shape="round"
+                    routerLink="/plant-detail/{{ id + 1 }}" routerDirection="foward" expand="block">
+                    More Info
+                  </ion-button>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCol, IonContent, IonGrid, IonRow, IonText } from '@ionic/angular/standalone';
+import { IonButton, IonCol, IonContent, IonGrid, IonImg, IonItem, IonLabel, IonRow, IonSearchbar, IonText } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +9,8 @@ import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCol, IonContent, Io
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [
-    IonContent, IonText, IonGrid, IonRow, IonCol, IonCard, IonCardHeader,
-    IonCardTitle, CommonModule, IonButton, RouterModule
+    IonContent, IonText, IonGrid, IonRow, IonCol, CommonModule, IonButton,
+    RouterModule, IonItem, IonImg, IonLabel, IonSearchbar
   ]
 })
 export class HomePage {
