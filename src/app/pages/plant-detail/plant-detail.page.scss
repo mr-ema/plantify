@@ -1,13 +1,22 @@
-swiper-slide {
-  align-self: center;
+swiper-container {
+  --swiper-pagination-bottom: 18px;
 }
 
-@media (min-width: 992px) {
-  .center-ctn > div {
-    max-width: 800px;
-  }
+swiper-slide {
+  align-self: center;
+  min-height: 350px;
+  aspect-ratio: 1.5 / 1;
+}
 
-  ion-card {
-    max-width: 800px;
-  }
+ion-card {
+  width: calc(100% - var(--ion-padding, 16px));
+  height: calc(100% - var(--ion-padding, 16px));
+}
+
+ion-card > img {
+  width: 100%;
+}
+
+.center-ctn > div {
+  max-width: 1200px;
 }

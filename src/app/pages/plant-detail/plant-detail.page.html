@@ -10,14 +10,21 @@
 <ion-content [fullscreen]="true" *ngIf="plant">
   <div class="center-ctn">
     <div>
-      <swiper-container class="ion-margin-horizontal" [grabCursor]="true" [slidesPerView]="1" [speed]="500" [pagination]="true">
+      <swiper-container
+        class="ion-margin-horizontal"
+        [grabCursor]="true"
+        [slidesPerView]="1"
+        [speed]="500"
+        [pagination]="true">
         <swiper-slide>
-          <ion-card>
+          <ion-card class="ion-padding-bottom">
             <img [src]="plant.imgUrl" alt="{{ plant.name }}" />
+
             <ion-card-header>
               <ion-card-title>{{ plant.name }}</ion-card-title>
               <ion-card-subtitle>{{ plant.subtitle || "" }}</ion-card-subtitle>
             </ion-card-header>
+
             <ion-card-content>
               {{ plant.description }}
             </ion-card-content>
@@ -29,6 +36,7 @@
             <ion-card-header>
               <ion-card-title>More Info</ion-card-title>
             </ion-card-header>
+
             <ion-card-content>
               {{ plant.description }}
             </ion-card-content>
