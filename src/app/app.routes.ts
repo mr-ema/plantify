@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { TabsComponent } from '@components/tabs/tabs.component';
+import { AuthGuard } from '@services/auth/permissions.service';
 
 export const routes: Routes = [
   {
@@ -19,12 +20,8 @@ export const routes: Routes = [
   },
 
   {
-    path: 'plant-detail/:id',
-    loadComponent: () => import('./pages/plant-detail/plant-detail.page').then( m => m.PlantDetailPage)
-  },
-
-  {
     path: 'tabs',
+    canActivate: [AuthGuard],
     component: TabsComponent,
     children: [
       {
@@ -45,7 +42,14 @@ export const routes: Routes = [
   },
 
   {
+    path: 'plant-detail/:id',
+    canActivate: [AuthGuard],
+    loadComponent: () => import('./pages/plant-detail/plant-detail.page').then( m => m.PlantDetailPage)
+  },
+
+  {
     path: 'my-plants',
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',

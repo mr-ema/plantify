@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { IonCol, IonContent, IonGrid, IonInput, IonRow, IonText, IonItem, IonButton } from '@ionic/angular/standalone';
+import { AuthService } from '@services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ import { IonCol, IonContent, IonGrid, IonInput, IonRow, IonText, IonItem, IonBut
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private _authService: AuthService, private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -28,6 +29,7 @@ export class LoginPage implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
+      this._authService.login();
       this.router.navigate(['/tabs', { username: this.loginForm.value.username }]);
     }
   }
