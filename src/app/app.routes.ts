@@ -69,4 +69,14 @@ export const routes: Routes = [
       },
     ]
   },
+
+  /*****************
+   * Error Routes  *
+   *****************/
+  {
+    path: '**',
+    loadComponent: () => import('./pages/error/404/not-found.page').then( m => m.NotFoundPage)
+  }
 ];
+
+
