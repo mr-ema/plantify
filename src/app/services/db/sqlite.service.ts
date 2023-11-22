@@ -7,7 +7,9 @@ import {
   capSQLiteUpgradeOptions, capSQLiteResult, capSQLiteValues
 } from '@capacitor-community/sqlite';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SQLiteService {
   sqliteConnection!: SQLiteConnection;
   isService: boolean = false;
