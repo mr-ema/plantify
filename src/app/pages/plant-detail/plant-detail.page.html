@@ -7,14 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" *ngIf="plant">
+<ion-content [fullscreen]="true" *ngIf="plant; else plantNotFound">
   <div class="center-ctn">
     <div>
-      <swiper-container
-        class="ion-margin-horizontal"
-        [grabCursor]="true"
-        [slidesPerView]="1"
-        [speed]="500"
+      <swiper-container class="ion-margin-horizontal" [grabCursor]="true" [slidesPerView]="1" [speed]="500"
         [pagination]="true">
         <swiper-slide>
           <ion-card class="ion-padding-bottom">
@@ -22,7 +18,7 @@
 
             <ion-card-header>
               <ion-card-title>{{ plant.name }}</ion-card-title>
-              <ion-card-subtitle>{{ plant.subtitle || "" }}</ion-card-subtitle>
+              <ion-card-subtitle>"Family: "</ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content>
@@ -48,3 +44,18 @@
     </div>
   </div>
 </ion-content>
+
+<ng-template #plantNotFound>
+  <ion-content [fullscreen]="true">
+    <div class="center-ctn">
+      <ion-text class="ion-text-center ion-padding">
+        <h1>OPPS!</h1>
+        <h2>THE PLANT YOU'RE LOOKING FOR COULD NOT BE FOUND</h2>
+      </ion-text>
+
+      <ion-button class="ion-margin-top" shape="round" routerLink="/">
+        Back To Home
+      </ion-button>
+    </div>
+  </ion-content>
+</ng-template>
