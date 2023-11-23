@@ -15,15 +15,9 @@ Plantify is a wiki app about plants.
 
 ## Features
 - [x] Cross plantaform
-- [ ] Local database for caching
+- [x] Local sqlite database for caching
+- [ ] Authentication System
 - [ ] Find a plant using a picture
 
 </br>
 </br>
-
-## Important
-You need to copy manually the sqlite wasm file so the app can run on the web.
-[Web Quirks - @capacitor-community/sqlite](https://github.com/capacitor-community/sqlite/tree/master#web-quirks)
-
-- unix: `cp node_modules/sql.js/dist/sql-wasm.wasm src/assets`
-- powershell: `Copy-Item -Path node_modules/sql.js/dist/sql-wasm.wasm -Destination src/assets`
