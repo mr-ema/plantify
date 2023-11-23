@@ -30,7 +30,7 @@ export class LoginPage implements OnInit {
   login() {
     if (this.loginForm.valid) {
       this._authService.login();
-      this.router.navigate(['/tabs', { username: this.loginForm.value.username }]);
+      this.router.navigate(['/tabs', { username: this.loginForm.value.username }], { replaceUrl: true });
     }
   }
 
