@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { IonBackButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonBackButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonSpinner, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { PlantService } from '@services/db/plant.service';
 import { Plant } from '@models/plant';
 
@@ -14,11 +14,13 @@ import { Plant } from '@models/plant';
   imports: [
     CommonModule, IonContent, IonCard, IonCardHeader, IonCardTitle, IonHeader,
     IonCardSubtitle, IonCardContent, RouterModule, IonTitle, IonBackButton, IonToolbar,
-    IonButtons
+    IonButtons, IonSpinner
   ]
 })
 export class PlantDetailPage implements OnInit {
   plant!: Plant;
+  loading: boolean = true;
+  plantNotFound: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,6 +33,11 @@ export class PlantDetailPage implements OnInit {
     // check for valid id number
     if (plantId && plantId.match(/^-?\d+$/)) {
       this.plant = await this.plantService.getPlantById(parseInt(plantId) as number) as Plant;
+      this.loading = false;
+
+      if (!this.plant) {
+        this.plantNotFound = true;
+      }
     }
   }
 

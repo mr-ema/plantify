@@ -7,8 +7,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" *ngIf="plant; else plantNotFound">
-  <div class="center-ctn">
+<ion-content [fullscreen]="true">
+  <div class="center-ctn" *ngIf="loading">
+      <ion-spinner name="dots"></ion-spinner>
+  </div>
+
+  <div class="center-ctn" *ngIf="!loading && plant">
     <div>
       <swiper-container class="ion-margin-horizontal" [grabCursor]="true" [slidesPerView]="1" [speed]="500"
         [pagination]="true">
@@ -43,19 +47,15 @@
       </swiper-container>
     </div>
   </div>
-</ion-content>
 
-<ng-template #plantNotFound>
-  <ion-content [fullscreen]="true">
-    <div class="center-ctn">
+    <div class="center-ctn" *ngIf="plantNotFound">
       <ion-text class="ion-text-center ion-padding">
         <h1>OPPS!</h1>
         <h2>THE PLANT YOU'RE LOOKING FOR COULD NOT BE FOUND</h2>
       </ion-text>
 
-      <ion-button class="ion-margin-top" shape="round" routerLink="/">
+      <ion-button class="ion-margin-top" shape="round" routerLink="/tabs/home">
         Back To Home
       </ion-button>
     </div>
-  </ion-content>
-</ng-template>
+</ion-content>
