@@ -2,6 +2,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { IonBackButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { PlantService } from '@services/db/plant.service';
+import { Plant } from '@models/plant';
 
 @Component({
   selector: 'app-plant-detail',
@@ -16,18 +18,20 @@ import { IonBackButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonC
   ]
 })
 export class PlantDetailPage implements OnInit {
-  plant: any;
+  plant!: Plant;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private plantService: PlantService,
+  ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     const plantId = this.route.snapshot.paramMap.get('id');
 
-    this.plant = {
-      imgUrl: "https://ionicframework.com/docs/img/demos/card-media.png",
-      name: "plant" + plantId,
-      description: "lorem inpsu"
-    };
+    // check for valid id number
+    if (plantId && plantId.match(/^-?\d+$/)) {
+      this.plant = await this.plantService.getPlantById(parseInt(plantId) as number) as Plant;
+    }
   }
 
 }

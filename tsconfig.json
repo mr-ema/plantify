@@ -22,7 +22,10 @@
     "useDefineForClassFields": false,
     "paths": {
       "@components/*": ["src/app/components/*"],
-      "@services/*": ["src/app/services/*"]
+      "@services/*": ["src/app/services/*"],
+      "@db-upgrades/*": ["src/app/upgrades/*"],
+      "@models/*": ["src/app/models/*"],
+      "@mock-data/*": ["src/app/mock-data/*"]
     }
   },
   "angularCompilerOptions": {
