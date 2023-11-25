@@ -15,9 +15,10 @@ Plantify is a wiki app about plants.
 
 ## Features
 - [x] Cross plantaform
-- [x] Local sqlite database for caching
+- [x] Local sqlite database
 - [ ] Authentication System
 - [ ] Find a plant using a picture
+- [ ] Api Rest
 
 </br>
 </br>
