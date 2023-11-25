@@ -12,7 +12,7 @@
       <ion-spinner name="dots"></ion-spinner>
   </div>
 
-  <div class="center-ctn" *ngIf="!loading && plant">
+  <div class="center-ctn" *ngIf="!loading && !plantNotFound">
     <div>
       <swiper-container class="ion-margin-horizontal" [grabCursor]="true" [slidesPerView]="1" [speed]="500"
         [pagination]="true">

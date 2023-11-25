@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Toast } from '@capacitor/toast';
 
 import { SQLiteService } from './db/sqlite.service';
-import { PlantService } from './db/plant.service';
 import { StorageService } from './db/storage.service';
 
 @Injectable({
@@ -14,8 +13,7 @@ export class InitializeAppService {
 
   constructor(
     private storageService: StorageService,
-    private sqliteService: SQLiteService,
-    private plantService: PlantService
+    private sqliteService: SQLiteService
   ) { }
 
   async initializeApp() {
@@ -29,9 +27,6 @@ export class InitializeAppService {
         if (this.sqliteService.platform === 'web') {
           await this.sqliteService.initWebStore();
         }
-
-        // init data bases
-        await this.plantService.initializeDatabase();
 
         this.isAppInit = true;
 

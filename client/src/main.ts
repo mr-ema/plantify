@@ -12,6 +12,7 @@ import { Capacitor } from '@capacitor/core';
 import { defineCustomElements as pwaElements } from '@ionic/pwa-elements/loader';
 import { defineCustomElements as jeepSqlite } from 'jeep-sqlite/loader';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { HttpClientModule } from '@angular/common/http';
 
 if (environment.production) {
   enableProdMode();
@@ -46,13 +47,14 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular(),
     provideRouter(routes),
 
+    importProvidersFrom(IonicStorageModule.forRoot()),
+    importProvidersFrom(HttpClientModule),
+
     {
       provide: APP_INITIALIZER,
       useFactory: initializeFactory,
       deps: [InitializeAppService],
       multi: true
     },
-
-    importProvidersFrom(IonicStorageModule.forRoot())
   ],
 });

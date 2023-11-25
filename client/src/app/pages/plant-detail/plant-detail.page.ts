@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { IonBackButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonSpinner, IonTitle, IonToolbar } from '@ionic/angular/standalone';
-import { PlantService } from '@services/db/plant.service';
+import { PlantService } from '@services/api/plant.service';
 import { Plant } from '@models/plant';
 
 @Component({
@@ -32,12 +32,17 @@ export class PlantDetailPage implements OnInit {
 
     // check for valid id number
     if (plantId && plantId.match(/^-?\d+$/)) {
-      this.plant = await this.plantService.getPlantById(parseInt(plantId) as number) as Plant;
-      this.loading = false;
+      (await this.plantService.getPlantById(plantId)).subscribe(
+        (data: Plant) => {
+          if (!data) {
+            this.plantNotFound = true;
+          }
 
-      if (!this.plant) {
-        this.plantNotFound = true;
-      }
+          this.plant = { ...data };
+          this.loading = false;
+        }
+      );
+
     }
   }
 

@@ -14,8 +14,4 @@ describe('PlantService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initialize database', () => {
-    expectAsync(service.initializeDatabase()).toBeResolved();
-  });
-
 });

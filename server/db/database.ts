@@ -13,7 +13,8 @@ export function init() {
   );
 
   // Move it to a separated file for testing purposes in the future
-  if (Bun.env.ENVIROMENT == "develoment") {
+  const isTableEmpty = fetchAll().length == 0;
+  if (Bun.env.ENVIROMENT == "develoment" && isTableEmpty) {
     const { MOCK_PLANTS } = require("@mock-data/plant.ts");
 
     for (const plant of MOCK_PLANTS) {
@@ -31,4 +32,12 @@ export function fetchAll() {
   query.finalize();
 
   return plants;
+}
+
+export function getPlantById(id: string | number) {
+  const query = db.query(`SELECT * FROM plant WHERE id = ${id};`);
+  const plants = query.all();
+  query.finalize();
+
+  return plants[0];
 }
