@@ -4,6 +4,12 @@ Plantify is a wiki app about plants.
 </br>
 </br>
 
+## Notes
+This is my first project in `ionic/angular` and `bun`. Feel free to try it out
+
+</br>
+</br>
+
 ## Resources
 - [ionic framework](https://ionicframework.com)
 - [@capacitor-community/sqlite](https://github.com/capacitor-community/sqlite)
