@@ -1,18 +1,30 @@
 import { Injectable } from '@angular/core';
+import { StorageService } from '@services/db/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthenticated = false;
+  private authTokenName = "jwt_token";
 
-  constructor() { }
+  constructor(private storageService: StorageService) {}
 
-  login() {
-    this.isAuthenticated = true;
+  async login() {
+    this.storageService.set(this.authTokenName, this.generateRandomToken());
   }
 
-  isAuthenticatedUser(): boolean {
-    return this.isAuthenticated;
+  generateRandomToken(): string {
+    return Math.random().toString(36).substring(7);
+  }
+
+  logout() {
+    this.storageService.remove(this.authTokenName);
+  }
+
+  async isAuthenticatedUser(): Promise<boolean> {
+      const token = await this.storageService.get(this.authTokenName);
+
+      // by pass validation of the token to test storage
+      return !!token;
   }
 }

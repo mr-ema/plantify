@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, enableProdMode } from '@angular/core';
+import { APP_INITIALIZER, enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
@@ -11,6 +11,7 @@ import { Capacitor } from '@capacitor/core';
 
 import { defineCustomElements as pwaElements } from '@ionic/pwa-elements/loader';
 import { defineCustomElements as jeepSqlite } from 'jeep-sqlite/loader';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 if (environment.production) {
   enableProdMode();
@@ -51,5 +52,7 @@ bootstrapApplication(AppComponent, {
       deps: [InitializeAppService],
       multi: true
     },
+
+    importProvidersFrom(IonicStorageModule.forRoot())
   ],
 });

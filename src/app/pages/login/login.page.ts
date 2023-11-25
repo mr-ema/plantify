@@ -25,12 +25,18 @@ export class LoginPage implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  async ngOnInit() {
+    const isAuthenticated = await this._authService.isAuthenticatedUser();
 
-  login() {
+    if (isAuthenticated) {
+      this.router.navigate(['/tabs'], { replaceUrl: true });
+    }
+  }
+
+  async login() {
     if (this.loginForm.valid) {
-      this._authService.login();
-      this.router.navigate(['/tabs', { username: this.loginForm.value.username }], { replaceUrl: true });
+      await this._authService.login();
+      this.router.navigate(['/tabs'], { replaceUrl: true });
     }
   }
 

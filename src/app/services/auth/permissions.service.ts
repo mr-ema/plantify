@@ -8,8 +8,8 @@ import { AuthService } from './auth.service';
 export class PermissionsService {
   constructor(private authService: AuthService, private router: Router) { }
 
-  canActivate(): boolean | UrlTree {
-    if (!this.authService.isAuthenticatedUser()) {
+  async canActivate(): Promise<boolean | UrlTree> {
+    if (!(await this.authService.isAuthenticatedUser())) {
       return this.router.parseUrl("/login");
     }
 
@@ -18,6 +18,6 @@ export class PermissionsService {
 }
 
 
-export const AuthGuard: CanActivateFn = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree => {
+export const AuthGuard: CanActivateFn = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> => {
   return inject(PermissionsService).canActivate();
 }
