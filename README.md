@@ -1,11 +1,5 @@
 # Plantify
-Plantify is a wiki app about plants.
-
-</br>
-</br>
-
-## Notes
-This is my first project in `ionic/angular` and `bun`. Feel free to try it out
+Plantify is a wiki app about plants. Feel free to try it out
 
 </br>
 </br>
