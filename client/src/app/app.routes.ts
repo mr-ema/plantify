@@ -34,9 +34,8 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/home/home.page').then(m => m.HomePage),
       },
       {
-        path: 'list',
-        loadComponent: () => import('./pages/my-plants/list/list.page').then(m => m.ListPage)
-
+        path: 'bookmark',
+        loadComponent: () => import('./pages/bookmark/bookmark.page').then(m => m.BookmarkPage)
       }
     ]
   },
@@ -44,34 +43,7 @@ export const routes: Routes = [
   {
     path: 'plant-detail/:id',
     canActivate: [AuthGuard],
-    loadComponent: () => import('./pages/plant-detail/plant-detail.page').then( m => m.PlantDetailPage)
-  },
-
-  {
-    path: 'my-plants',
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'list',
-      },
-
-      {
-        path: 'edit',
-        loadComponent: () => import('./pages/my-plants/edit/edit.page').then(m => m.EditPage)
-      },
-
-      {
-        path: 'add',
-        loadComponent: () => import('./pages/my-plants/add/add.page').then(m => m.AddPage)
-      },
-
-      {
-        path: 'list',
-        loadComponent: () => import('./pages/my-plants/list/list.page').then(m => m.ListPage)
-      },
-    ]
+    loadComponent: () => import('./pages/plant-detail/plant-detail.page').then(m => m.PlantDetailPage)
   },
 
   /*****************
@@ -79,8 +51,8 @@ export const routes: Routes = [
    *****************/
   {
     path: '**',
-    loadComponent: () => import('./pages/error/404/not-found.page').then( m => m.NotFoundPage)
-  }
+    loadComponent: () => import('./pages/error/404/not-found.page').then(m => m.NotFoundPage)
+  },
 ];
 
 
