@@ -18,13 +18,19 @@ app.get('/api/v1/plants', (req, res) => {
   res.status(200).json(plants);
 });
 
-app.get('/api/v1/plants/:id', (req, res) => {
-  const plant = db.getPlantById(req.params?.id);
+app.get('/api/v1/plants/search', (req, res) => {
+  const query = req.query?.query;
 
+  if (!query) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
+
+  const plant = db.searchPlan(query);
   res.status(200).json(plant);
 });
 
-app.get('/api/v1/plants/search', (req, res) => {
+
+app.get('/api/v1/plants/:id', (req, res) => {
   const plant = db.getPlantById(req.params?.id);
 
   res.status(200).json(plant);
