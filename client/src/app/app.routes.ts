@@ -36,6 +36,10 @@ export const routes: Routes = [
       {
         path: 'bookmark',
         loadComponent: () => import('./pages/bookmark/bookmark.page').then(m => m.BookmarkPage)
+      },
+      {
+        path: 'search',
+        loadComponent: () => import('./pages/search/search.page').then(m => m.SearchPage)
       }
     ]
   },

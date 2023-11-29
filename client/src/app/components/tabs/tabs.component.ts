@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { IonIcon, IonTabBar, IonTabButton, IonTabs } from '@ionic/angular/standalone';
-import { homeOutline, leafOutline } from "ionicons/icons";
+import { bookmarkOutline, homeOutline, searchOutline } from "ionicons/icons";
 import { addIcons } from "ionicons";
 
 addIcons({
   "home-outline": homeOutline,
-  "leaf-outline": leafOutline
+  "search-outline": searchOutline,
+  "bookmark-outline": bookmarkOutline
 });
 
 @Component({

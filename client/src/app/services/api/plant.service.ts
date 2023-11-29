@@ -18,8 +18,14 @@ export class PlantService {
     );
   }
 
-  getAllPlants() {
+  async getAllPlants() {
     return this.http.get<Plant[]>(`${this.apiUrl}/plants`).pipe(
+      catchError(this.handleError<Plant[]>("getAllPlants"))
+    );
+  }
+
+  async searchPlant(query: string) {
+    return this.http.get<Plant[]>(`${this.apiUrl}/plants/search?query=${query}`).pipe(
       catchError(this.handleError<Plant[]>("getAllPlants"))
     );
   }
