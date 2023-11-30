@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonCol, IonContent, IonGrid, IonImg, IonInput, IonItem, IonLabel, IonList, IonRow, IonSearchbar, IonSpinner, IonText } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, map, BehaviorSubject } from 'rxjs';
 
 import { PlantService } from '@services/api/plant.service';
 import { Plant } from '@models/plant';
@@ -18,27 +18,50 @@ import { Plant } from '@models/plant';
   ]
 })
 export class SearchPage implements OnInit {
-  searchData$?: Observable<Plant[]>;
-  loading = false;
+  public searchData$?: Observable<Plant[]>;
+  public loading = false;
+
+  private _searchCache = new Map<string, Plant[]>();
 
   constructor(private _plantService: PlantService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  async handleSearchInput(event: any) {
+  public async handleSearchInput(event: any): Promise<void> {
     const query: string = event.target.value.toLowerCase();
 
-    if (query.length >= 1) {
-      // TODO: Limit list of items to 10
-      // TODO: Avoid so many re-rederings
-      //
-      // TODO(final): Optimize it avoiding so many api calls.
-      // maybe just call once and since the array returned will match the query,
-      // we could filter it on client side and if not found on client-side make a new request
-      this.loading = true;
-      this.searchData$ = await this._plantService.searchPlant(query);
-      this.loading = false;
+    if (query.length <= 0) {
+      return this._clearSearchResults();
     }
 
+    this.loading = true;
+
+    if (this._searchCache.has(query)) {
+      this.searchData$ = this._getCachedData(query);
+    } else {
+      this.searchData$ = await this._plantService.searchPlant(query);
+      this.searchData$.subscribe(data => this._updateCache(query, data));
+    }
+
+    this.searchData$ = this.searchData$.pipe(map(data => this._processSearchData(data)));
+    this.loading = false;
+  }
+
+  private _getCachedData(query: string): Observable<Plant[]> {
+    return new BehaviorSubject<Plant[]>(this._searchCache.get(query) as Plant[]);
+  }
+
+  private _updateCache(query: string, data: Plant[]): void {
+    this._searchCache.set(query, data);
+  }
+
+  private _processSearchData(data: Plant[]): Plant[] {
+    const processedData = data.slice(0, 10); // Limit list to n elements
+
+    return processedData;
+  }
+
+  private _clearSearchResults(): void {
+    this.searchData$ = undefined;
   }
 }
