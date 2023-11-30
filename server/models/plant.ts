@@ -1,6 +1,6 @@
 export interface Plant {
   id: number;
-  imgUrl: string;
+  img_url: string;
   name: string;
   description: string;
 }
