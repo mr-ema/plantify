@@ -1,9 +1,15 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { IonBackButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonSpinner, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonIcon, IonSpinner, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { PlantService } from '@services/api/plant.service';
 import { Plant } from '@models/plant';
+import { addIcons } from 'ionicons';
+import { bookmarkOutline } from 'ionicons/icons';
+
+addIcons({
+  "bookmark-outline": bookmarkOutline
+});
 
 @Component({
   selector: 'app-plant-detail',
@@ -14,36 +20,52 @@ import { Plant } from '@models/plant';
   imports: [
     CommonModule, IonContent, IonCard, IonCardHeader, IonCardTitle, IonHeader,
     IonCardSubtitle, IonCardContent, RouterModule, IonTitle, IonBackButton, IonToolbar,
-    IonButtons, IonSpinner
+    IonButtons, IonSpinner, IonIcon, IonButton
   ]
 })
 export class PlantDetailPage implements OnInit {
-  plant!: Plant;
-  loading: boolean = true;
-  plantNotFound: boolean = false;
+  public plant?: Plant;
+  public loading = true;
+  public isBookmarked = false;
 
   constructor(
-    private route: ActivatedRoute,
-    private plantService: PlantService,
+    private _route: ActivatedRoute,
+    private _plantService: PlantService,
   ) { }
 
   async ngOnInit() {
-    const plantId = this.route.snapshot.paramMap.get('id');
+    const plantId = this._route.snapshot.paramMap.get('id');
 
     // check for valid id number
     if (plantId && plantId.match(/^-?\d+$/)) {
-      (await this.plantService.getPlantById(plantId)).subscribe(
+      (await this._plantService.getPlantById(plantId)).subscribe(
         (data: Plant) => {
-          if (!data) {
-            this.plantNotFound = true;
+          if (data) {
+            this.plant = { ...data };
           }
 
-          this.plant = { ...data };
           this.loading = false;
         }
       );
 
+      (await this._plantService.getBookmarkedPlant(plantId)).subscribe(
+        data => {
+          if (data) {
+            this.isBookmarked = data.bookmark.is_bookmarked;
+          }
+        }
+      );
     }
   }
 
+  public async toggleBookmark(plant: Plant): Promise<void> {
+    (await this._plantService.togglePlantBookmark(plant.id.toString(), !this.isBookmarked))
+      .subscribe(data => {
+        if (data) {
+          this.isBookmarked = data.bookmark.is_bookmarked;
+        }
+      });
+
+    return;
+  }
 }

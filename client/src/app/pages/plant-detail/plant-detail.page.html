@@ -9,10 +9,10 @@
 
 <ion-content [fullscreen]="true">
   <div class="center-ctn" *ngIf="loading">
-      <ion-spinner name="dots"></ion-spinner>
+    <ion-spinner name="dots"></ion-spinner>
   </div>
 
-  <div class="center-ctn" *ngIf="!loading && !plantNotFound">
+  <div class="center-ctn" *ngIf="!loading && plant">
     <div>
       <swiper-container class="ion-margin-horizontal" [grabCursor]="true" [slidesPerView]="1" [speed]="500"
         [pagination]="true">
@@ -22,12 +22,20 @@
 
             <ion-card-header>
               <ion-card-title>{{ plant.name }}</ion-card-title>
-              <ion-card-subtitle>"Family: "</ion-card-subtitle>
+              <ion-card-subtitle>Family: </ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content>
               {{ plant.description }}
             </ion-card-content>
+
+            <div class="ion-float-right">
+              <ion-buttons slot="end">
+                <ion-button (click)="toggleBookmark(plant)" [color]="isBookmarked ? 'warning' : 'medium'">
+                  <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </div>
           </ion-card>
         </swiper-slide>
 
@@ -48,14 +56,14 @@
     </div>
   </div>
 
-    <div class="center-ctn" *ngIf="plantNotFound">
-      <ion-text class="ion-text-center ion-padding">
-        <h1>OPPS!</h1>
-        <h2>THE PLANT YOU'RE LOOKING FOR COULD NOT BE FOUND</h2>
-      </ion-text>
+  <div class="center-ctn" *ngIf="!plant && !loading">
+    <ion-text class="ion-text-center ion-padding">
+      <h1>OPPS!</h1>
+      <h2>THE PLANT YOU'RE LOOKING FOR COULD NOT BE FOUND</h2>
+    </ion-text>
 
-      <ion-button class="ion-margin-top" shape="round" routerLink="/tabs/home">
-        Back To Home
-      </ion-button>
-    </div>
+    <ion-button class="ion-margin-top" shape="round" routerLink="/tabs/home">
+      Back To Home
+    </ion-button>
+  </div>
 </ion-content>
