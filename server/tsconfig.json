@@ -19,8 +19,12 @@
       "bun-types" // add Bun global
     ],
     "paths": {
-      "@models/*": ["./models/*"],
-      "@mock-data/*": ["./mock-data/*"]
+      "@models/*": ["./src/models/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@mock-data/*": ["./__MOCKS__/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@db/*": ["./src/db/*"],
+      "@routes/*": ["./src/routes/*"]
     }
   }
 }
