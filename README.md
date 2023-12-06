@@ -15,7 +15,10 @@ Plantify is a wiki app about plants. Feel free to try it out
 </br>
 
 ## Screenshots
-![Screenshot](./blob/main/docs/screenshots.png)
+![Screenshot](/docs/screenshots.png)
+
+</br>
+</br>
 
 ## Features
 - [x] Cross plantaform
