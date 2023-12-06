@@ -5,6 +5,7 @@ Plantify is a wiki app about plants. Feel free to try it out
 </br>
 
 ## Resources
+- [Plantify Server](https://github.com/mr-ema/plantify-server)
 - [ionic framework](https://ionicframework.com)
 - [@capacitor-community/sqlite](https://github.com/capacitor-community/sqlite)
 - [ionic7-angular-sqlite-starter - jepiqueau](https://github.com/jepiqueau/ionic7-angular-sqlite-starter)
@@ -13,12 +14,12 @@ Plantify is a wiki app about plants. Feel free to try it out
 </br>
 </br>
 
+## Screenshots
+![Screenshot](./blob/main/docs/screenshots.png)
+
 ## Features
 - [x] Cross plantaform
 - [x] Local sqlite database
-- [ ] Authentication System
-- [ ] Find a plant using a picture
-- [ ] Api Rest
 
 </br>
 </br>
