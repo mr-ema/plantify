@@ -45,16 +45,16 @@ export class PlantService {
   }
 
   public async getAllBookmarkedPlants() {
-    return this._http.get<Plant[]>(`${this._apiUrl}/users/${this._userId}/bookmarks/plants`).pipe(
-      catchError(this._handleError<Plant[]>("getAllBookmarkedPlant"))
+    return this._http.get<any>(`${this._apiUrl}/users/${this._userId}/bookmarks/plants`).pipe(
+      catchError(this._handleError<any>("getAllBookmarkedPlant"))
     );
   }
 
-  public async togglePlantBookmark(plantId: string, new_value: boolean) {
+  public async togglePlantBookmark(plant: Plant, new_value: boolean) {
     return this._http.put<any>(
       `${this._apiUrl}/users/${this._userId}/bookmarks`,
       {
-        entity_id: plantId,
+        entity_id: plant.id,
         entity_type: 'plant',
         is_bookmarked: new_value
       },
@@ -62,7 +62,7 @@ export class PlantService {
     ).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 404) {
-          return this._createPlantBookmark(plantId);
+          return this._createPlantBookmark(plant);
         }
 
         return this._handleError<any>("togglePlantBookmark")(error);
@@ -70,11 +70,12 @@ export class PlantService {
     );
   }
 
-  private _createPlantBookmark(plantId: string) {
+  private _createPlantBookmark(plant: Plant) {
     return this._http.post<any>(
       `${this._apiUrl}/users/${this._userId}/bookmarks`,
       {
-        entity_id: plantId,
+        bookmark_name: plant.name,
+        entity_id: plant.id,
         entity_type: 'plant'
       },
       httpOptions
@@ -93,6 +94,6 @@ export class PlantService {
   }
 
   private _log(message: string) {
-    console.log(message);
+    console.debug(message);
   }
 }

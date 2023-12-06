@@ -9,16 +9,13 @@
     <ion-spinner name="circular"></ion-spinner>
   </div>
 
-  <ion-list *ngIf="plants && !loading">
-    <ion-item *ngFor="let plant of plants" (click)="plantClicked(plant)">
-      <ion-avatar slot="start">
-        <img [src]="plant.img_url" alt="{{ plant.name }} Image">
-      </ion-avatar>
-      <ion-label>{{ plant.name }}</ion-label>
+  <ion-list *ngIf="plantBookmarks && !loading">
+    <ion-item *ngFor="let plantBookmark of plantBookmarks" (click)="plantClicked(plantBookmark)">
+      <ion-label>{{ plantBookmark.name }}</ion-label>
     </ion-item>
   </ion-list>
 
-  <div class="center-ctn logo-bg" *ngIf="!plants && !loading">
+  <div class="center-ctn logo-bg" *ngIf="!plantBookmarks && !loading">
     <ion-text class="ion-text-center ion-padding">
       <h1>OPPS!</h1>
       <h2>NOT BOOKMARKS FOUNDED</h2>

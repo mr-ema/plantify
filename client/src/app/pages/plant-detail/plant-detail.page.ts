@@ -59,7 +59,7 @@ export class PlantDetailPage implements OnInit {
   }
 
   public async toggleBookmark(plant: Plant): Promise<void> {
-    (await this._plantService.togglePlantBookmark(plant.id.toString(), !this.isBookmarked))
+    (await this._plantService.togglePlantBookmark(plant, !this.isBookmarked))
       .subscribe(data => {
         if (data) {
           this.isBookmarked = data.bookmark.is_bookmarked;

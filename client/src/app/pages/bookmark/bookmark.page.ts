@@ -17,22 +17,22 @@ import { Router } from '@angular/router';
 })
 export class BookmarkPage implements OnInit {
   public loading = true;
-  public plants?: Plant[];
+  public plantBookmarks?: any[];
 
   constructor(private _plantService: PlantService, private _router: Router) { }
 
   async ngOnInit() {
     (await this._plantService.getAllBookmarkedPlants())
       .subscribe(data => {
-        if (data && data.length > 0) {
-          this.plants = data;
+        if (data && data.bookmarks.length > 0) {
+          this.plantBookmarks = data.bookmarks;
         }
 
         this.loading = false;
       });
   }
 
-  public plantClicked(plant: Plant) {
-    this._router.navigate(['plant-detail', plant.id]);
+  public plantClicked(plantBookmark: any) {
+    this._router.navigate(['plant-detail', plantBookmark.entity_id]);
   }
 }
