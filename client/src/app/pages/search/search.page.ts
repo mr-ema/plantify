@@ -40,7 +40,9 @@ export class SearchPage implements OnInit {
       this.searchData$ = this._getCachedData(query);
     } else {
       this.searchData$ = await this._plantService.searchPlant(query);
-      this.searchData$.subscribe(data => this._updateCache(query, data));
+      this.searchData$.subscribe(data => {
+        if (data) { this._updateCache(query, data); }
+      });
     }
 
     this.searchData$ = this.searchData$.pipe(map(data => this._processSearchData(data)));
@@ -55,10 +57,13 @@ export class SearchPage implements OnInit {
     this._searchCache.set(query, data);
   }
 
-  private _processSearchData(data: Plant[]): Plant[] {
-    const processedData = data.slice(0, 10); // Limit list to n elements
+  private _processSearchData(data?: Plant[]): Plant[] {
+    if (data) {
+      const processedData = data.slice(0, 10); // Limit list to n elements
+      return processedData;
+    }
 
-    return processedData;
+    return [];
   }
 
   private _clearSearchResults(): void {
