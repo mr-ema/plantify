@@ -4,6 +4,8 @@ import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModu
 import { Router, RouterModule } from '@angular/router';
 import { IonButton, IonCol, IonContent, IonGrid, IonInput, IonItem, IonRow, IonText } from '@ionic/angular/standalone';
 
+import { AuthService } from '@services/auth/auth.service';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -15,12 +17,12 @@ import { IonButton, IonCol, IonContent, IonGrid, IonInput, IonItem, IonRow, IonT
   ]
 })
 export class SignupPage implements OnInit {
-  registrationForm: FormGroup;
+  public registrationForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private _fb: FormBuilder, private _router: Router, private _authService: AuthService) {
     const passwordPattern = "^[0-9a-zA-Z]{8,16}$";
 
-    this.registrationForm = this.formBuilder.group({
+    this.registrationForm = this._fb.group({
       email: ['', [Validators.required, Validators.email]],
       name: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.pattern(passwordPattern)]],
@@ -28,16 +30,26 @@ export class SignupPage implements OnInit {
     });
 
     this.registrationForm.addValidators(
-      this.matchingPasswordsValidator(
+      this._matchingPasswordsValidator(
         this.registrationForm.get('password') as AbstractControl,
         this.registrationForm.get('confirmPassword') as AbstractControl
       )
     );
   }
 
-  ngOnInit() { }
+  async ngOnInit() {
+    if (await this._authService.isAuthenticatedUser()) {
+      this._router.navigate(['/'], { replaceUrl: true });
+    }
+  }
 
-  matchingPasswordsValidator(controlOne: AbstractControl, controlTwo: AbstractControl) {
+  public register() {
+    if (this.registrationForm.valid) {
+      this._router.navigate(['/login']);
+    }
+  }
+
+  private _matchingPasswordsValidator(controlOne: AbstractControl, controlTwo: AbstractControl) {
     return () => {
       const passOne = controlOne.value as string;
       const passTwo = controlTwo.value as string;
@@ -50,14 +62,30 @@ export class SignupPage implements OnInit {
     }
   }
 
-
-  register() {
-    if (this.registrationForm.valid) {
-      this.router.navigate(['/login']);
+  public getValidationMessage(controlName: string) {
+    const control = this.registrationForm.get(controlName);
+    if (!control) {
+      console.error(`Form control '${controlName}' not found.`);
+      return null;
     }
+
+    const key = controlName as keyof typeof this._validationMessages;
+    if (!this._validationMessages.hasOwnProperty(key)) {
+      console.error(`Validation messages for '${key}' is not defined.`);
+      return null;
+    }
+
+    const errors = this._validationMessages[key] || [];
+    for (const error of errors) {
+      if (control.hasError(error.type) && control.dirty) {
+        return error.message;
+      }
+    }
+
+    return null;
   }
 
-  validationMessages = {
+  private readonly _validationMessages = {
     email: [
       { type: 'required', message: 'El campo "email" es obligatorio.' },
       { type: 'email', message: 'Por favor, ingrese un correo electrónico válido.' },

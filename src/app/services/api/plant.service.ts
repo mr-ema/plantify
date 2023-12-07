@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Plant } from '@models/plant';
+
+import { Bookmark, Plant } from '@models/api';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,7 +17,7 @@ const httpOptions = {
 })
 export class PlantService {
   private _apiUrl = environment.apiUrl;
-  private _userId: string = "1"; // For testing use jwt_token in the future
+  private _userId: string = "1"; // For testing use a user id and a jwt_token in the future
 
   constructor(private _http: HttpClient) { }
 
@@ -39,24 +40,24 @@ export class PlantService {
   }
 
   public async getBookmarkedPlant(plantId: string) {
-    return this._http.get<any>(`${this._apiUrl}/users/${this._userId}/bookmarks/plants/${plantId}`).pipe(
-      catchError(this._handleError<any>("getBookmarkedPlant"))
+    return this._http.get<Bookmark>(`${this._apiUrl}/users/${this._userId}/bookmarks/plants/${plantId}`).pipe(
+      catchError(this._handleError<Bookmark>("getBookmarkedPlant"))
     );
   }
 
   public async getAllBookmarkedPlants() {
-    return this._http.get<any>(`${this._apiUrl}/users/${this._userId}/bookmarks/plants`).pipe(
-      catchError(this._handleError<any>("getAllBookmarkedPlant"))
+    return this._http.get<Bookmark[]>(`${this._apiUrl}/users/${this._userId}/bookmarks/plants`).pipe(
+      catchError(this._handleError<Bookmark[]>("getAllBookmarkedPlant"))
     );
   }
 
-  public async togglePlantBookmark(plant: Plant, new_value: boolean) {
-    return this._http.put<any>(
+  public async togglePlantBookmark(plant: Plant, newValue: boolean) {
+    return this._http.put<Bookmark>(
       `${this._apiUrl}/users/${this._userId}/bookmarks`,
       {
         entity_id: plant.id,
         entity_type: 'plant',
-        is_bookmarked: new_value
+        is_bookmarked: newValue
       },
       httpOptions
     ).pipe(

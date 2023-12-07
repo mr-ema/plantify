@@ -8,62 +8,70 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="center-ctn" *ngIf="loading">
-    <ion-spinner name="dots"></ion-spinner>
-  </div>
+  @if (loading) {
 
-  <div class="center-ctn" *ngIf="!loading && plant">
-    <div>
-      <swiper-container class="ion-margin-horizontal" [grabCursor]="true" [slidesPerView]="1" [speed]="500"
-        [pagination]="true">
-        <swiper-slide>
-          <ion-card class="ion-padding-bottom">
-            <img [src]="plant.img_url" alt="{{ plant.name }}" />
-
-            <ion-card-header>
-              <ion-card-title>{{ plant.name }}</ion-card-title>
-              <ion-card-subtitle>Family: </ion-card-subtitle>
-            </ion-card-header>
-
-            <ion-card-content>
-              {{ plant.description }}
-            </ion-card-content>
-
-            <div class="ion-float-right">
-              <ion-buttons slot="end">
-                <ion-button (click)="toggleBookmark(plant)" [color]="isBookmarked ? 'warning' : 'medium'">
-                  <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
-                </ion-button>
-              </ion-buttons>
-            </div>
-          </ion-card>
-        </swiper-slide>
-
-        <swiper-slide>
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>More Info</ion-card-title>
-            </ion-card-header>
-
-            <ion-card-content>
-              {{ plant.description }}
-            </ion-card-content>
-          </ion-card>
-        </swiper-slide>
-
-        <swiper-pagination type="bullets"></swiper-pagination>
-      </swiper-container>
+    <div class="center-ctn">
+      <ion-spinner name="dots"></ion-spinner>
     </div>
-  </div>
 
-  <div class="center-ctn" *ngIf="!plant && !loading">
-    <ion-text class="ion-text-center ion-padding">
-      <h1>OPPS!</h1>
-      <h2>THE PLANT YOU'RE LOOKING FOR COULD NOT BE FOUND</h2>
-    </ion-text>
+  } @else if (plant) {
 
-    <ion-button class="ion-margin-top" shape="round" routerLink="/tabs/home">
-      Back To Home
-    </ion-button>
-  </div>
+    <div class="center-ctn">
+      <div>
+        <swiper-container class="ion-margin-horizontal" [grabCursor]="true" [slidesPerView]="1" [speed]="500"
+          [pagination]="true">
+          <swiper-slide>
+            <ion-card class="ion-padding-bottom">
+              <img [src]="plant.img_url" alt="{{ plant.name }}" />
+
+              <ion-card-header>
+                <ion-card-title>{{ plant.name }}</ion-card-title>
+                <ion-card-subtitle>Family: </ion-card-subtitle>
+              </ion-card-header>
+
+              <ion-card-content>
+                {{ plant.description }}
+              </ion-card-content>
+
+              <div class="ion-float-right">
+                <ion-buttons slot="end">
+                  <ion-button (click)="toggleBookmark(plant)" [color]="isBookmarked ? 'warning' : 'medium'">
+                    <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </div>
+            </ion-card>
+          </swiper-slide>
+
+          <swiper-slide>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>More Info</ion-card-title>
+              </ion-card-header>
+
+              <ion-card-content>
+                {{ plant.description }}
+              </ion-card-content>
+            </ion-card>
+          </swiper-slide>
+
+          <swiper-pagination type="bullets"></swiper-pagination>
+        </swiper-container>
+      </div>
+    </div>
+
+  } @else {
+
+    <div class="center-ctn">
+      <ion-text class="ion-text-center ion-padding">
+        <h1>OPPS!</h1>
+        <h2>THE PLANT YOU'RE LOOKING FOR COULD NOT BE FOUND</h2>
+      </ion-text>
+
+      <ion-button class="ion-margin-top" shape="round" routerLink="/tabs/home">
+        Back To Home
+      </ion-button>
+    </div>
+
+  }
 </ion-content>

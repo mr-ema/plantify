@@ -5,7 +5,7 @@ import { AuthGuard } from '@services/auth/permissions.service';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'tabs',
     pathMatch: 'full',
   },
 

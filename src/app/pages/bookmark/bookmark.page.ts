@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonAvatar, IonContent, IonHeader, IonItem, IonLabel, IonList, IonSpinner, IonText, IonTitle, IonToolbar } from '@ionic/angular/standalone';
-import { Plant } from '@models/plant';
-import { PlantService } from '@services/api/plant.service';
 import { Router } from '@angular/router';
+import { IonAvatar, IonContent, IonHeader, IonItem, IonLabel, IonList, IonSpinner, IonText, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+
+import { PlantService } from '@services/api/plant.service';
+import { Bookmark } from '@models/api';
 
 @Component({
   selector: 'app-bookmark',
@@ -17,15 +18,15 @@ import { Router } from '@angular/router';
 })
 export class BookmarkPage implements OnInit {
   public loading = true;
-  public plantBookmarks?: any[];
+  public plantBookmarks?: Bookmark[];
 
   constructor(private _plantService: PlantService, private _router: Router) { }
 
   async ngOnInit() {
     (await this._plantService.getAllBookmarkedPlants())
-      .subscribe(data => {
-        if (data && data.bookmarks.length > 0) {
-          this.plantBookmarks = data.bookmarks;
+      .subscribe((data) => {
+        if (data && data.length > 0) {
+          this.plantBookmarks = data;
         }
 
         this.loading = false;

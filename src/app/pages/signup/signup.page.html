@@ -13,10 +13,10 @@
             <ion-item>
               <ion-input label="Email" labelPlacement="stacked" formControlName="email" type="email"></ion-input>
             </ion-item>
-            <div *ngFor="let validation of validationMessages.email">
-              <ion-text color="danger" class="error-msg"
-                *ngIf="registrationForm.get('email')?.hasError(validation.type) && registrationForm.get('email')?.dirty">
-                {{ validation.message }}
+
+            <div>
+              <ion-text color="danger" class="error-msg">
+                {{ getValidationMessage("email") }}
               </ion-text>
             </div>
           </ion-col>
@@ -25,10 +25,10 @@
             <ion-item>
               <ion-input label="Name" labelPlacement="stacked" formControlName="name" type="text"></ion-input>
             </ion-item>
-            <div *ngFor="let validation of validationMessages.name">
-              <ion-text color="danger" class="error-msg"
-                *ngIf="registrationForm.get('name')?.hasError(validation.type) && registrationForm.get('name')?.dirty">
-                {{ validation.message }}
+
+            <div>
+              <ion-text color="danger" class="error-msg">
+                {{ getValidationMessage("name") }}
               </ion-text>
             </div>
           </ion-col>
@@ -37,10 +37,10 @@
             <ion-item>
               <ion-input label="Password" labelPlacement="stacked" id="password" formControlName="password" type="password"></ion-input>
             </ion-item>
-            <div *ngFor="let validation of validationMessages.password">
-              <ion-text color="danger" class="error-msg"
-                *ngIf="registrationForm.get('password')?.hasError(validation.type) && registrationForm.get('password')?.dirty">
-                {{ validation.message }}
+
+            <div>
+              <ion-text color="danger" class="error-msg">
+                {{ getValidationMessage("password") }}
               </ion-text>
             </div>
           </ion-col>
@@ -50,10 +50,10 @@
               <ion-input label="Confirm Password" labelPlacement="stacked" id="confirmPassword" formControlName="confirmPassword"
                 type="password"></ion-input>
             </ion-item>
-            <div *ngFor="let validation of validationMessages.confirmPassword">
-              <ion-text color="danger" class="error-msg"
-                *ngIf="registrationForm.get('confirmPassword')?.hasError(validation.type) && registrationForm.get('confirmPassword')?.dirty">
-                {{ validation.message }}
+
+            <div>
+              <ion-text color="danger" class="error-msg">
+                {{ getValidationMessage("confirmPassword") }}
               </ion-text>
             </div>
           </ion-col>

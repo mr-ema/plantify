@@ -7,11 +7,13 @@ export class DbnameVersionService {
   private _dbNameVersionDict: Map<string, number> = new Map();
 
   constructor() { }
-  set(dbName: string, version: number) {
+
+  public set(dbName: string, version: number) {
     this._dbNameVersionDict.set(dbName, version);
 
   }
-  getVersion(dbName: string) {
+
+  public getVersion(dbName: string) {
     if (this._dbNameVersionDict.has(dbName)) {
       return this._dbNameVersionDict.get(dbName);
     } else {

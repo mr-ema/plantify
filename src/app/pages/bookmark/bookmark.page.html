@@ -5,20 +5,28 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="center-ctn" *ngIf="loading">
-    <ion-spinner name="circular"></ion-spinner>
-  </div>
+  @if (loading) {
 
-  <ion-list *ngIf="plantBookmarks && !loading">
-    <ion-item *ngFor="let plantBookmark of plantBookmarks" (click)="plantClicked(plantBookmark)">
-      <ion-label>{{ plantBookmark.name }}</ion-label>
-    </ion-item>
-  </ion-list>
+    <div class="center-ctn">
+      <ion-spinner name="circular"></ion-spinner>
+    </div>
 
-  <div class="center-ctn logo-bg" *ngIf="!plantBookmarks && !loading">
-    <ion-text class="ion-text-center ion-padding">
-      <h1>OPPS!</h1>
-      <h2>NOT BOOKMARKS FOUNDED</h2>
-    </ion-text>
-  </div>
+  } @else if (plantBookmarks) {
+
+    <ion-list>
+      <ion-item *ngFor="let plantBookmark of plantBookmarks" (click)="plantClicked(plantBookmark)">
+        <ion-label>{{ plantBookmark.name }}</ion-label>
+      </ion-item>
+    </ion-list>
+
+  } @else {
+
+    <div class="center-ctn logo-bg">
+      <ion-text class="ion-text-center ion-padding">
+        <h1>OPPS!</h1>
+        <h2>NOT BOOKMARKS FOUNDED</h2>
+      </ion-text>
+    </div>
+
+  }
 </ion-content>

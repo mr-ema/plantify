@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { IonButton, IonCol, IonContent, IonGrid, IonImg, IonInput, IonItem, IonLabel, IonList, IonRow, IonSearchbar, IonSpinner, IonText } from '@ionic/angular/standalone';
 
-import { Plant } from '@models/plant';
+import { Plant } from '@models/api';
 import { PlantService } from '@services/api/plant.service';
 
 @Component({
@@ -18,8 +18,8 @@ import { PlantService } from '@services/api/plant.service';
   ]
 })
 export class HomePage implements OnInit {
-  loading = true;
-  plants?: Plant[];
+  public loading = true;
+  public plants?: Plant[];
 
   constructor(private _plantService: PlantService) { }
 

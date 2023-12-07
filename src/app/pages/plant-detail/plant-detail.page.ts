@@ -2,10 +2,11 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonIcon, IonSpinner, IonTitle, IonToolbar } from '@ionic/angular/standalone';
-import { PlantService } from '@services/api/plant.service';
-import { Plant } from '@models/plant';
 import { addIcons } from 'ionicons';
 import { bookmarkOutline } from 'ionicons/icons';
+
+import { PlantService } from '@services/api/plant.service';
+import { Plant } from '@models/api';
 
 addIcons({
   "bookmark-outline": bookmarkOutline
@@ -51,7 +52,7 @@ export class PlantDetailPage implements OnInit {
       (await this._plantService.getBookmarkedPlant(plantId)).subscribe(
         data => {
           if (data) {
-            this.isBookmarked = data.bookmark.is_bookmarked;
+            this.isBookmarked = data.is_bookmarked;
           }
         }
       );
@@ -62,7 +63,7 @@ export class PlantDetailPage implements OnInit {
     (await this._plantService.togglePlantBookmark(plant, !this.isBookmarked))
       .subscribe(data => {
         if (data) {
-          this.isBookmarked = data.bookmark.is_bookmarked;
+          this.isBookmarked = data.is_bookmarked;
         }
       });
 

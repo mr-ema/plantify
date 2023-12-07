@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { Observable, map, BehaviorSubject } from 'rxjs';
 
 import { PlantService } from '@services/api/plant.service';
-import { Plant } from '@models/plant';
+import { Plant } from '@models/api';
 
 @Component({
   selector: 'app-search',

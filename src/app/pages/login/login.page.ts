@@ -12,14 +12,18 @@ import { AuthService } from '@services/auth/auth.service';
   standalone: true,
   imports: [
     IonInput, IonContent, IonItem, IonText, IonGrid, RouterModule,
-    IonCol, IonRow, IonButton, CommonModule,  FormsModule, ReactiveFormsModule
+    IonCol, IonRow, IonButton, CommonModule, FormsModule, ReactiveFormsModule
   ]
 })
 export class LoginPage implements OnInit {
-  loginForm: FormGroup;
+  public loginForm: FormGroup;
 
-  constructor(private _authService: AuthService, private fb: FormBuilder, private router: Router) {
-    this.loginForm = this.fb.group({
+  constructor(
+    private _authService: AuthService,
+    private _fb: FormBuilder,
+    private _router: Router
+  ) {
+    this.loginForm = this._fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
@@ -29,18 +33,45 @@ export class LoginPage implements OnInit {
     const isAuthenticated = await this._authService.isAuthenticatedUser();
 
     if (isAuthenticated) {
-      this.router.navigate(['/tabs'], { replaceUrl: true });
+      this._router.navigate(['/tabs'], { replaceUrl: true });
     }
+
+    return;
   }
 
-  async login() {
+  public async login() {
     if (this.loginForm.valid) {
       await this._authService.login();
-      this.router.navigate(['/tabs'], { replaceUrl: true });
+      this._router.navigate(['/tabs'], { replaceUrl: true });
     }
+
+    return;
   }
 
-  validationMessages = {
+  public getValidationMessage(controlName: string) {
+    const control = this.loginForm.get(controlName);
+    if (!control) {
+      console.error(`Form control '${controlName}' not found.`);
+      return null;
+    }
+
+    const key = controlName as keyof typeof this._validationMessages;
+    if (!this._validationMessages.hasOwnProperty(key)) {
+      console.error(`Validation messages for '${key}' is not defined.`);
+      return null;
+    }
+
+    const errors = this._validationMessages[key] || [];
+    for (const error of errors) {
+      if (control.hasError(error.type) && control.dirty) {
+        return error.message;
+      }
+    }
+
+    return null;
+  }
+
+  private readonly _validationMessages = {
     email: [
       { type: 'required', message: 'El campo de correo electrónico es obligatorio.' },
       { type: 'email', message: 'Por favor, ingrese un correo electrónico válido.' },
@@ -50,4 +81,3 @@ export class LoginPage implements OnInit {
     ],
   };
 }
-

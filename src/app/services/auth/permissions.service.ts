@@ -6,11 +6,11 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class PermissionsService {
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private _authService: AuthService, private _router: Router) { }
 
-  async canActivate(): Promise<boolean | UrlTree> {
-    if (!(await this.authService.isAuthenticatedUser())) {
-      return this.router.parseUrl("/login");
+  public async canActivate(): Promise<boolean | UrlTree> {
+    if (!(await this._authService.isAuthenticatedUser())) {
+      return this._router.parseUrl("/login");
     }
 
     return true;
