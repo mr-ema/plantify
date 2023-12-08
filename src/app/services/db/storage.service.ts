@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
@@ -10,7 +9,7 @@ export class StorageService {
 
   constructor(private _storageProvider: Storage) {}
 
-  async init() {
+  public async init() {
     // If using, define drivers here: await this.storage.defineDriver(/*...*/);
     const storage = await this._storageProvider.create();
     this._storage = storage;
